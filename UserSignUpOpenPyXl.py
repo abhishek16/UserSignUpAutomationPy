@@ -79,10 +79,10 @@ for i in range(1, sheet.max_row+1):
 
         #Set Password & Confirm Password here
         SetPassword = driver.find_element_by_id("Password")
-        SetPassword.send_keys("Admin@12345")
+        SetPassword.send_keys("asdfgfqwerr432321@@!")
 
         ConfPassword = driver.find_element_by_id("ConfirmPassword")
-        ConfPassword.send_keys("Admin@12345")
+        ConfPassword.send_keys("asdfgfqwerr432321@@!")
 
 
         time.sleep(1)
