@@ -22,10 +22,10 @@ for i in range(1, sheet.max_row+1):
         #Login action
         LoginTextBox = driver.find_element_by_id("UserName")
         LoginTextBox.clear()
-        LoginTextBox.send_keys("sqa@arroweyesolutions.com")
+        LoginTextBox.send_keys("")
         PasswordTextBox = driver.find_element_by_id("Password")
         PasswordTextBox.clear()
-        PasswordTextBox.send_keys("sqauser")
+        PasswordTextBox.send_keys("")
         LoginButton = driver.find_element_by_xpath("/html/body/div[2]/div/div/div/div/form/fieldset/div[4]/div/button")
         LoginButton.click()
 
