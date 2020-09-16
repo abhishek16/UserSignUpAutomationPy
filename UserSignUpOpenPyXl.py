@@ -1,18 +1,27 @@
-#for x in range(5):
+#for x in range(3):
 
 
-import time, sys, time, os, pyautogui, webbrowser, openpyxl, pandas as pd
+import time, sys, os, pyautogui, webbrowser, openpyxl, pandas as pd
 from ddt import ddt, data, unpack
 from openpyxl.cell.read_only import EmptyCell
 from selenium import webdriver
+import datetime
+
+start_time = datetime.datetime.now()
+print('')
+print("User creation started at: ",start_time)	
+print('')
 
 
 excel_document = openpyxl.load_workbook(r"C:\Users\akulkarni\Desktop\Arroweye_Customer Service Tool Test.xlsx", data_only=True)    
-sheet = excel_document["TestDirectory"]
-print (sheet.max_row)
+sheet = excel_document["ADP"]
+#sheet = excel_document["TestDirectory"]
+print ("Total users to be created = ",sheet.max_row)
+print('')
 for i in range(1, sheet.max_row+1):
 
         driver = webdriver.Chrome(executable_path="C:/chromedriver_win32/chromedriver.exe")
+        driver.delete_all_cookies()
 
         # URL declaration
         base_url="https://portalwebt1.asitest.net/Portal3/Login?ReturnUrl=%2fPortal3%2fUserManagement%2fUserEdit%3fClientId%3d152&ClientId=152"
@@ -22,10 +31,10 @@ for i in range(1, sheet.max_row+1):
         #Login action
         LoginTextBox = driver.find_element_by_id("UserName")
         LoginTextBox.clear()
-        LoginTextBox.send_keys("")
+        LoginTextBox.send_keys("sqa@arroweyesolutions.com")
         PasswordTextBox = driver.find_element_by_id("Password")
         PasswordTextBox.clear()
-        PasswordTextBox.send_keys("")
+        PasswordTextBox.send_keys("sqauser")
         LoginButton = driver.find_element_by_xpath("/html/body/div[2]/div/div/div/div/form/fieldset/div[4]/div/button")
         LoginButton.click()
 
@@ -63,15 +72,15 @@ for i in range(1, sheet.max_row+1):
 
         
         AddLine1 = driver.find_element_by_id("Address1")
-        AddLine1.send_keys("400 W. Covina Blvd")
+        AddLine1.send_keys("123 W. Dream Blvd")
         AddCity = driver.find_element_by_id("City")
-        AddCity.send_keys("San Dimas")
+        AddCity.send_keys("San Andreas")
         AddState = driver.find_element_by_id("State")
-        AddState.send_keys("CA")
+        AddState.send_keys("IL")
         AddCountry = driver.find_element_by_id("Country")
         AddCountry.send_keys("USA")
         AddZipCode = driver.find_element_by_id("ZipCode")
-        AddZipCode.send_keys("91733")
+        AddZipCode.send_keys("12345")
 
 
         #Select user role here
@@ -79,10 +88,10 @@ for i in range(1, sheet.max_row+1):
 
         #Set Password & Confirm Password here
         SetPassword = driver.find_element_by_id("Password")
-        SetPassword.send_keys("asdfgfqwerr432321@@!")
+        SetPassword.send_keys("12345")
 
         ConfPassword = driver.find_element_by_id("ConfirmPassword")
-        ConfPassword.send_keys("asdfgfqwerr432321@@!")
+        ConfPassword.send_keys("12345")
 
 
         time.sleep(1)
@@ -100,5 +109,14 @@ for i in range(1, sheet.max_row+1):
 #User creation count
         print ("User {} - {} created successfully!".format(i, userName))
 else:
+        print('')
         print("All users created successfully!")
+        print('')
+        end_time = datetime.datetime.now()  
+        elapsedTime = end_time - start_time
+        diff = divmod(elapsedTime.total_seconds(), 60)
+
+        print("User creation run ended at: ",end_time)
+        print('')
+        print('Total time taken in MM, SS= ',diff)
 
